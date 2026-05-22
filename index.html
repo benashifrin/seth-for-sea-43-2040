@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seth for SEA 43-2040 — Transit. Housing. Unions.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+/* === Tweakable defaults === */
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "accent": "cobalt",
+  "theme": "light",
+  "heroLayout": "portrait-right",
+  "horizonMotif": true
+}/*EDITMODE-END*/;
+</script>
+<style>
+  :root{
+    --linen:#EDEAE0;
+    --powder:#9EB9D4;
+    --cobalt:#002387;
+    --spruce:#1E4D2B;
+    --graphite:#343434;
+    --ink:#1a1a1c;
+
+    --bg:var(--linen);
+    --bg-2:#f5f3ec;
+    --card:#fffdf7;
+    --fg:var(--graphite);
+    --fg-muted:#5b5b5b;
+    --rule:#cfc9b8;
+
+    --accent:var(--cobalt);
+    --accent-2:var(--spruce);
+    --accent-ink:#fff;
+    --hover-tint:rgba(0,35,135,.08);
+
+    --display:"Josefin Sans", "Kabel LT Pro", ui-sans-serif, system-ui;
+    --body:"Public Sans", ui-sans-serif, system-ui;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+
+    --maxw:1240px;
+    --pad:clamp(20px,4vw,56px);
+  }
+  [data-accent="spruce"]{
+    --accent:var(--spruce);
+    --accent-2:var(--cobalt);
+    --hover-tint:rgba(30,77,43,.10);
+  }
+  [data-theme="dark"]{
+    --bg:#1a1c1a;
+    --bg-2:#22251f;
+    --card:#262922;
+    --fg:#e9e6dc;
+    --fg-muted:#a8a59a;
+    --rule:#3a3d34;
+    --linen:#22251f;
+    --powder:#3a5a7e;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--accent);color:#fff}
+  a{color:inherit}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;
+    padding:14px var(--pad);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{
+    display:flex;align-items:baseline;gap:10px;
+    font-family:var(--display);font-weight:800;font-size:22px;
+    letter-spacing:-.02em;
+    text-decoration:none;color:var(--fg);
+  }
+  .brand .for{
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    color:var(--fg-muted);letter-spacing:.08em;text-transform:uppercase;
+  }
+  .brand .dot{
+    display:inline-block;width:10px;height:10px;border-radius:50%;
+    background:var(--accent);transform:translateY(1px);
+  }
+  .nav-links{display:flex;gap:6px;align-items:center}
+  .nav-links a{
+    text-decoration:none;color:var(--fg);
+    padding:8px 12px;border-radius:999px;
+    font-size:15px;font-weight:500;
+    transition:background .15s;
+  }
+  .nav-links a:hover{background:var(--hover-tint)}
+  .nav-cta{
+    background:var(--accent);color:#fff !important;
+    padding:10px 18px !important;border-radius:999px;
+    font-weight:600 !important;
+  }
+  .nav-cta:hover{background:var(--accent-2);color:#fff !important}
+
+  /* ============ HERO ============ */
+  .hero-wrap{
+    position:relative;overflow:hidden;
+    background:linear-gradient(180deg, #f4efe0 0%, var(--linen) 78%);
+    border-bottom:1px solid var(--rule);
+  }
+  [data-theme="dark"] .hero-wrap{
+    background:linear-gradient(180deg, #1f231d 0%, var(--bg) 78%);
+  }
+  .hero-stripes{
+    position:absolute;left:0;right:0;top:0;bottom:60px;
+    pointer-events:none;z-index:1;
+  }
+  .hero-stripes svg{width:100%;height:100%;display:block}
+  .hero{
+    position:relative;z-index:2;
+    max-width:var(--maxw);margin:0 auto;
+    padding:24px var(--pad) 0;
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:40px;align-items:center;
+    min-height:660px;
+  }
+  [data-hero="portrait-left"] .hero{grid-template-columns:1fr 1fr}
+  [data-hero="portrait-left"] .hero-text{order:2}
+  [data-hero="portrait-left"] .hero-portrait{order:1;justify-content:flex-end}
+  [data-hero="portrait-left"] .hero-portrait img{transform:translateX(4%) scaleX(-1)}
+  [data-hero="no-portrait"] .hero{grid-template-columns:1fr;max-width:920px;min-height:480px;align-items:center}
+  [data-hero="no-portrait"] .hero-portrait{display:none}
+  [data-hero="no-portrait"] .hero-text{padding:32px 0}
+
+  .hero-text{
+    padding:24px 0 32px 0;
+    align-self:center;
+    position:relative;z-index:3;
+  }
+  .hero-portrait{
+    position:relative;z-index:3;
+    align-self:center;
+    display:flex;justify-content:flex-start;align-items:center;
+    min-height:auto;
+  }
+  .hero-portrait img{
+    display:block;width:auto;
+    height:600px;max-height:74vh;
+    filter:drop-shadow(0 22px 36px rgba(0,0,0,.22));
+    transform:translateX(-4%);
+    pointer-events:none;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 18px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{
+    content:"";width:28px;height:2px;background:var(--accent);display:inline-block;
+  }
+  .h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(54px,8vw,116px);
+    line-height:.92;letter-spacing:-.02em;
+    margin:0 0 16px;color:var(--fg);
+    text-wrap:balance;
+  }
+  .h1 .lede-mark{color:var(--accent)}
+  .h1 .strike{position:relative;display:inline-block}
+  .h1 .strike::after{
+    content:"";position:absolute;left:-2%;right:-2%;top:55%;
+    height:.14em;background:var(--accent);border-radius:2px;
+    transform:rotate(-2deg);
+  }
+  .hero-sub{
+    font-size:17px;line-height:1.45;color:var(--fg);
+    max-width:34ch;margin:0 0 22px;
+  }
+  .hero-sub b{font-weight:600;color:var(--accent)}
+
+  .signup{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:10px 10px 10px 14px;
+    max-width:420px;
+    box-shadow:0 1px 0 rgba(0,0,0,.02), 0 10px 26px -22px rgba(0,35,135,.35);
+  }
+  .signup-row{display:flex;gap:8px;align-items:center;margin:0}
+  .signup input{
+    flex:1;min-width:0;padding:11px 2px;
+    border:0;background:transparent;
+    font:inherit;color:var(--fg);font-size:15px;
+  }
+  .signup input:focus{outline:none}
+  .btn{
+    appearance:none;border:0;cursor:pointer;
+    font:600 14px/1 var(--body);
+    padding:11px 18px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;transition:transform .08s, background .15s, color .15s;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-2)}
+  .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--rule)}
+  .btn-ghost:hover{background:var(--hover-tint);border-color:var(--accent)}
+  .btn .arr{display:inline-block;transition:transform .2s}
+  .btn:hover .arr{transform:translateX(3px)}
+  .signup-note{
+    margin:10px 4px 0;font-size:12px;color:var(--fg-muted);
+    font-family:var(--mono);letter-spacing:.04em;
+  }
+  .signup-note b{color:var(--accent);font-weight:600}
+
+/* ============ URGENCY BAR ============ */
+  .urgency{
+    position:relative;z-index:5;
+    background:var(--graphite);color:#fff;
+    padding:14px var(--pad);
+    font-family:var(--mono);font-size:13px;letter-spacing:.04em;
+    display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  [data-theme="dark"] .urgency{background:#0f100e}
+  .urgency b{color:var(--powder);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+  .urgency a{color:#ef8a5a;text-decoration:underline;text-underline-offset:3px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+  [data-accent="spruce"] .urgency a{color:var(--powder)}
+  .urgency-dot{
+    width:8px;height:8px;border-radius:50%;background:#ef4a4a;flex-shrink:0;
+    box-shadow:0 0 0 0 rgba(239,74,74,.7);
+    animation:redpulse 1.6s infinite;
+  }
+  @keyframes redpulse{
+    0%{box-shadow:0 0 0 0 rgba(239,74,74,.7)}
+    70%{box-shadow:0 0 0 10px rgba(239,74,74,0)}
+    100%{box-shadow:0 0 0 0 rgba(239,74,74,0)}
+  }
+
+  /* ============ HORIZON STRIP ============ */
+  .horizon{
+    position:relative;margin-top:8px;
+    padding:0 var(--pad);max-width:var(--maxw);margin-left:auto;margin-right:auto;
+  }
+  .horizon svg{width:100%;height:auto;display:block;border-radius:18px;overflow:hidden}
+  .horizon-caption{
+    margin:10px 4px 0;font-family:var(--mono);font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .horizon-caption span{display:inline-flex;align-items:center;gap:6px}
+  .horizon-caption .sw{width:10px;height:10px;border-radius:2px;background:var(--accent)}
+
+  /* ============ WHY ============ */
+  section{padding:96px var(--pad)}
+  section .wrap{max-width:var(--maxw);margin:0 auto}
+  .section-eyebrow{
+    font-family:var(--mono);font-size:12px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 18px;
+  }
+  .why{
+    display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start;
+  }
+  .why h2{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(36px,4.4vw,60px);
+    line-height:.98;letter-spacing:-.025em;margin:0;
+    text-wrap:balance;
+  }
+  .why h2 em{font-style:normal;color:var(--accent)}
+  .why-body p{
+    font-size:18px;line-height:1.6;margin:0 0 18px;
+    max-width:60ch;
+  }
+  .why-body p:first-child::first-letter{
+    font-family:var(--display);font-weight:800;
+    font-size:62px;line-height:.85;float:left;
+    margin:6px 10px -4px 0;color:var(--accent);
+  }
+  .why-meta{
+    margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .pill{
+    font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+    background:var(--card);border:1px solid var(--rule);
+    padding:8px 12px;border-radius:999px;color:var(--fg);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .pill .dot-s{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+  /* ============ ISSUES ============ */
+  .issues{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .issues-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
+    margin-bottom:48px;flex-wrap:wrap;
+  }
+  .issues-head h2{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(40px,5.2vw,76px);line-height:.95;letter-spacing:-.03em;
+    margin:0;max-width:14ch;text-wrap:balance;
+  }
+  .issues-head h2 em{font-style:normal;color:var(--accent)}
+  .issues-head p{
+    max-width:42ch;font-size:17px;color:var(--fg-muted);margin:0;
+  }
+  .issue{
+    display:grid;grid-template-columns:90px 1fr 1fr;gap:40px;
+    padding:36px 0;border-top:1px solid var(--rule);align-items:start;
+  }
+  .issue:last-of-type{border-bottom:1px solid var(--rule)}
+  .issue-num{
+    font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--fg-muted);
+    padding-top:6px;
+  }
+  .issue-title{
+    display:flex;align-items:center;gap:18px;
+  }
+  .issue-title h3{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(32px,3.4vw,46px);
+    line-height:.95;letter-spacing:-.02em;margin:0;
+    color:var(--accent);
+  }
+  .issue-icon{
+    width:56px;height:56px;border-radius:14px;background:var(--card);
+    border:1px solid var(--rule);
+    display:grid;place-items:center;flex-shrink:0;
+  }
+  .issue-icon svg{width:32px;height:32px}
+  .issue-body p{margin:0 0 12px;font-size:16.5px;line-height:1.55}
+  .issue-body p:last-child{margin-bottom:0}
+  .issue-body strong{color:var(--accent);font-weight:600}
+  .issue-tag{
+    display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--fg-muted);
+    margin-bottom:10px;
+  }
+
+  /* ============ STAND-FOR LIST ============ */
+  .commit{padding-top:72px;padding-bottom:96px;background:var(--cobalt);color:#fff}
+  [data-accent="spruce"] .commit{background:var(--spruce)}
+  [data-theme="dark"] .commit{background:#101130}
+  [data-theme="dark"][data-accent="spruce"] .commit{background:#0f1d13}
+  .commit h2{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.025em;
+    margin:0 0 36px;color:#fff;
+  }
+  .commit h2 em{font-style:normal;color:var(--powder)}
+  .commit-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;
+  }
+  .commit-item{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:16px 0;border-top:1px solid rgba(255,255,255,.18);
+    font-size:18px;line-height:1.4;
+  }
+  .commit-item .chk{
+    flex-shrink:0;width:28px;height:28px;border-radius:50%;
+    background:var(--powder);color:var(--cobalt);
+    display:grid;place-items:center;font-weight:800;
+    margin-top:2px;
+  }
+  [data-accent="spruce"] .commit-item .chk{color:var(--spruce)}
+
+  /* ============ CLEAN CAMPAIGN BANNER ============ */
+  .clean{
+    background:var(--linen);
+    position:relative;overflow:hidden;
+    padding:0 !important;
+  }
+  .clean-inner{
+    max-width:var(--maxw);margin:0 auto;
+    padding:80px var(--pad);
+    display:grid;grid-template-columns:1fr;gap:0;
+    align-items:center;
+  }
+  .clean-text{
+    display:flex;flex-direction:column;justify-content:center;gap:18px;
+    max-width:780px;margin:0 auto;text-align:center;align-items:center;
+  }
+  .clean-text h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4vw,52px);line-height:1.02;letter-spacing:-.02em;
+    margin:0;text-wrap:balance;
+  }
+  .clean-text h2 em{font-style:normal;color:var(--accent)}
+  .clean-text p{margin:0;font-size:17px;line-height:1.5;max-width:42ch;color:var(--fg-muted)}
+  .clean-text .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;
+    border-top:1px solid var(--rule);padding-top:24px;
+    width:100%;max-width:560px;
+  }
+  .clean-text .stat-n{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(28px,2.6vw,40px);line-height:1;color:var(--accent);letter-spacing:-.02em;
+  }
+  .clean-text .stat-l{
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--fg-muted);margin-top:6px;
+  }
+  .clean-photo{
+    background:
+      repeating-linear-gradient(135deg,
+        color-mix(in srgb, var(--accent) 60%, transparent) 0 14px,
+        color-mix(in srgb, var(--accent) 45%, transparent) 14px 28px),
+      var(--accent);
+    position:relative;min-height:380px;
+    display:flex;align-items:flex-end;padding:20px;
+  }
+  .clean-photo::before{
+    content:"";position:absolute;inset:16px;border:1px dashed rgba(255,255,255,.4);border-radius:8px;
+  }
+  .clean-photo .ph-tag{
+    position:relative;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    background:#fff;color:var(--accent);padding:6px 10px;border-radius:6px;
+  }
+
+  /* ============ NEIGHBORHOOD PRIDE ============ */
+  .pride{background:var(--linen)}
+  .pride-grid{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;
+  }
+  .pride-photo{
+    aspect-ratio:4/3;border-radius:20px;overflow:hidden;
+    border:1px solid var(--rule);position:relative;
+    background:#1a1c1a;
+  }
+  .pride-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .pride h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4.4vw,58px);line-height:1;letter-spacing:-.025em;
+    margin:0 0 24px;text-wrap:balance;
+  }
+  .pride h2 em{font-style:normal;color:var(--accent)}
+  .pride p{font-size:17px;line-height:1.6;margin:0 0 16px;max-width:55ch}
+  .pride .pride-cta{
+    margin-top:14px;display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);text-decoration:none;
+    border-bottom:1px solid var(--accent);padding-bottom:4px;
+  }
+  .pride .pride-cta:hover{color:var(--accent-2);border-color:var(--accent-2)}
+
+  /* ============ COUNTDOWN ============ */
+  .countdown-sec{
+    background:var(--graphite);color:#fff;
+    padding:80px var(--pad);
+    position:relative;overflow:hidden;
+  }
+  [data-theme="dark"] .countdown-sec{background:#0f100e}
+  .countdown-sec::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 90% 30%, color-mix(in srgb, var(--accent-2) 20%, transparent) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .countdown-inner{
+    max-width:var(--maxw);margin:0 auto;position:relative;z-index:1;
+    display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;
+  }
+  .countdown-inner .cd-eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--powder);margin:0 0 16px;
+  }
+  .countdown-inner h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4.2vw,56px);line-height:1;letter-spacing:-.02em;
+    margin:0 0 14px;color:#fff;text-wrap:balance;
+  }
+  .countdown-inner h2 em{font-style:normal;color:var(--powder)}
+  .countdown-inner p{
+    font-size:16px;line-height:1.55;color:rgba(255,255,255,.75);margin:0 0 22px;max-width:42ch;
+  }
+  .countdown-inner .cd-btn{
+    background:#fff;color:var(--graphite);
+    padding:13px 22px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
+    font-weight:600;font-size:14.5px;text-decoration:none;
+  }
+  .countdown-inner .cd-btn:hover{background:var(--powder)}
+  .countdown-clock{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  }
+  .cd-unit{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;padding:24px 12px 16px;text-align:center;
+    transition:border-color .2s;
+  }
+  .cd-unit:hover{border-color:var(--powder)}
+  .cd-num{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(38px,4.6vw,64px);line-height:1;color:#fff;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .cd-label{
+    margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.6);
+  }
+
+  /* ============ FOLLOW ============ */
+  .follow{background:var(--linen)}
+  .follow-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
+    flex-wrap:wrap;margin-bottom:36px;
+  }
+  .follow-head h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4.2vw,54px);line-height:1;letter-spacing:-.02em;
+    margin:0;text-wrap:balance;
+  }
+  .follow-head p{
+    margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .follow-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .follow-card{
+    background:var(--card);border:1px solid var(--rule);border-radius:16px;
+    padding:20px;display:flex;flex-direction:column;gap:8px;
+    text-decoration:none;color:var(--fg);
+    transition:transform .15s, border-color .15s, background .15s;
+  }
+  .follow-card:hover{
+    transform:translateY(-3px);border-color:var(--accent);
+    background:color-mix(in srgb, var(--accent) 4%, var(--card));
+  }
+  .follow-card .fc-handle{
+    font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.01em;
+  }
+  .follow-card .fc-platform{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--fg-muted);
+  }
+  .follow-card .fc-arrow{
+    margin-top:auto;color:var(--accent);font-size:14px;display:inline-flex;align-items:center;gap:6px;
+  }
+
+  /* ============ VIDEOS ============ */
+  .videos{background:var(--bg-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .videos-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
+    flex-wrap:wrap;margin-bottom:36px;
+  }
+  .videos-head h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4.2vw,56px);line-height:1;letter-spacing:-.02em;
+    margin:0;text-wrap:balance;
+  }
+  .videos-head h2 em{font-style:normal;color:var(--accent)}
+  .videos-head p{
+    margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .videos-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  }
+  .vid-card{
+    cursor:pointer;display:flex;flex-direction:column;gap:10px;
+    text-decoration:none;color:var(--fg);
+  }
+  .vid-thumb{
+    aspect-ratio:5/4;border-radius:14px;overflow:hidden;
+    position:relative;
+    background:
+      repeating-linear-gradient(135deg,
+        color-mix(in srgb, var(--graphite) 80%, transparent) 0 12px,
+        color-mix(in srgb, var(--graphite) 60%, transparent) 12px 24px);
+    border:1px solid var(--rule);
+    display:flex;align-items:flex-end;padding:14px;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .vid-card:hover .vid-thumb{
+    transform:translateY(-3px);
+    box-shadow:0 20px 40px -24px rgba(0,35,135,.45);
+  }
+  .vid-thumb .vid-tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    background:#fff;color:var(--graphite);padding:5px 8px;border-radius:5px;
+    position:relative;z-index:1;
+  }
+  .vid-play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;background:#fff;
+    display:grid;place-items:center;
+    box-shadow:0 8px 20px -8px rgba(0,0,0,.4);
+  }
+  .vid-play svg{width:22px;height:22px;color:var(--accent);transform:translateX(2px)}
+  .vid-title{
+    font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em;
+    line-height:1.15;
+  }
+  .vid-card .vid-meta{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--fg-muted);
+  }
+
+  /* ============ ABOUT ============ */
+  .about{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start}
+  .about-photo{
+    aspect-ratio:1/1.05;border-radius:20px;overflow:hidden;
+    background:transparent;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .about-photo::after{
+    content:"";position:absolute;left:-12px;bottom:-12px;width:64%;height:64%;
+    background:var(--accent-2);border-radius:18px;z-index:-1;
+  }
+  .about-photo img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 6%;
+    display:block;
+    transform:scale(1.18);transform-origin:center 35%;
+  }
+  .about h2{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(34px,4vw,54px);line-height:1;letter-spacing:-.025em;margin:0 0 24px;
+    text-wrap:balance;
+  }
+  .about h2 em{font-style:normal;color:var(--accent)}
+  .about p{font-size:17px;line-height:1.6;margin:0 0 16px;max-width:60ch}
+  .timeline{
+    margin-top:32px;border-top:1px solid var(--rule);
+  }
+  .tl-row{
+    display:grid;grid-template-columns:140px 1fr;gap:24px;
+    padding:18px 0;border-bottom:1px solid var(--rule);
+    align-items:baseline;
+  }
+  .tl-year{
+    font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.05em;
+  }
+  .tl-role{font-weight:600;font-size:16px}
+  .tl-where{color:var(--fg-muted);font-size:14.5px;margin-top:3px}
+
+  /* ============ GET INVOLVED ============ */
+  .involve{
+    background:var(--bg-2);border-top:1px solid var(--rule);
+  }
+  .involve h2{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.03em;
+    margin:0 0 12px;text-wrap:balance;
+  }
+  .involve h2 em{font-style:normal;color:var(--accent)}
+  .involve .lede{max-width:48ch;font-size:18px;color:var(--fg-muted);margin:0 0 40px}
+  .involve-grid{
+    display:grid;grid-template-columns:minmax(0,520px);gap:18px;justify-content:center;
+  }
+  .involve-card{
+    background:var(--card);border:1px solid var(--rule);border-radius:18px;
+    padding:26px 24px 22px;display:flex;flex-direction:column;gap:14px;
+    transition:transform .15s, border-color .15s, box-shadow .15s;
+    text-decoration:none;color:var(--fg);
+  }
+  .involve-card:hover{
+    transform:translateY(-3px);border-color:var(--accent);
+    box-shadow:0 24px 50px -32px rgba(0,35,135,.35);
+  }
+  .involve-card .ic-icon{
+    width:42px;height:42px;border-radius:10px;background:var(--bg-2);
+    border:1px solid var(--rule);display:grid;place-items:center;
+  }
+  .involve-card .ic-icon svg{width:22px;height:22px}
+  .involve-card h4{
+    font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.015em;
+    margin:0;line-height:1.05;
+  }
+  .involve-card p{margin:0;color:var(--fg-muted);font-size:15px;line-height:1.5}
+  .involve-card .ic-arrow{
+    margin-top:auto;font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+
+  /* ============ ENDORSE ============ */
+  .endorse{
+    padding:72px var(--pad);background:var(--bg);
+  }
+  .endorse-inner{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;
+  }
+  .endorse h2{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(34px,4.4vw,58px);line-height:1;letter-spacing:-.025em;margin:0 0 16px;
+    text-wrap:balance;
+  }
+  .endorse blockquote{
+    margin:0;font-family:var(--display);font-weight:500;
+    font-size:clamp(20px,2.1vw,26px);line-height:1.3;letter-spacing:-.015em;
+    color:var(--fg);
+    border-left:3px solid var(--accent);padding-left:20px;
+  }
+  .endorse blockquote::before{content:"\201C";color:var(--accent);font-size:1.2em;margin-right:.05em}
+  .endorse blockquote::after{content:"\201D";color:var(--accent)}
+  .endorse cite{
+    display:block;font-style:normal;margin-top:14px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);
+  }
+
+  /* ============ DATES ============ */
+  .dates{background:var(--graphite);color:#fff;padding:80px var(--pad)}
+  [data-theme="dark"] .dates{background:#0f100e}
+  .dates-inner{max-width:var(--maxw);margin:0 auto}
+  .dates-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:40px}
+  .dates-head h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4.2vw,56px);line-height:1;letter-spacing:-.02em;
+    margin:0;color:#fff;text-wrap:balance;max-width:18ch;
+  }
+  .dates-head h2 em{font-style:normal;color:var(--powder)}
+  .dates-head p{
+    margin:0;max-width:36ch;color:rgba(255,255,255,.7);font-size:15px;line-height:1.5;
+  }
+  .dates-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;
+  }
+  .date-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:18px;
+    padding:32px 28px;
+    display:flex;flex-direction:column;gap:10px;
+    transition:border-color .2s, background .2s;
+  }
+  .date-card:hover{border-color:var(--powder);background:rgba(255,255,255,.08)}
+  .date-card .dc-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--powder);
+  }
+  .date-card .dc-date{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,3.8vw,52px);line-height:1;letter-spacing:-.02em;color:#fff;
+    margin-top:6px;
+  }
+  .date-card .dc-sub{
+    font-size:15px;line-height:1.45;color:rgba(255,255,255,.7);max-width:38ch;margin-top:6px;
+  }
+  .date-card .dc-meta{
+    margin-top:auto;padding-top:18px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(255,255,255,.5);
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--graphite);color:#e6e2d2;padding:64px var(--pad) 28px;
+  }
+  [data-theme="dark"] footer{background:#0f100e}
+  .foot-inner{max-width:var(--maxw);margin:0 auto}
+  .foot-top{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;
+    padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.15);
+  }
+  .foot-brand{
+    font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.02em;color:#fff;
+  }
+  .foot-brand .for{
+    display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:#a8a59a;margin-top:6px;
+  }
+  .foot-blurb{margin-top:14px;color:#bdb9aa;font-size:14.5px;line-height:1.5;max-width:32ch}
+  .foot-col h5{
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:#a8a59a;margin:0 0 14px;font-weight:500;
+  }
+  .foot-col a{
+    display:block;color:#e6e2d2;text-decoration:none;font-size:15px;
+    padding:5px 0;
+  }
+  .foot-col a:hover{color:var(--powder)}
+  .foot-bottom{
+    padding-top:22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#a8a59a;
+  }
+
+  /* ============ TWEAKS PANEL ============ */
+  .tweaks{
+    position:fixed;right:18px;bottom:18px;z-index:100;
+    background:var(--card);border:1px solid var(--rule);border-radius:16px;
+    padding:16px;width:260px;display:none;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.35);
+    font-family:var(--body);
+  }
+  .tweaks.open{display:block}
+  .tweaks h6{
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--fg-muted);margin:0 0 8px;font-weight:500;
+  }
+  .tweaks h4{
+    font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:-.01em;
+    margin:0 0 14px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .tweaks .x{
+    border:0;background:transparent;cursor:pointer;color:var(--fg-muted);font-size:18px;
+    line-height:1;padding:0 4px;
+  }
+  .tweaks .grp{margin-bottom:14px}
+  .seg{
+    display:flex;background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;
+    padding:3px;gap:2px;
+  }
+  .seg button{
+    flex:1;appearance:none;border:0;background:transparent;cursor:pointer;
+    padding:7px 6px;font:500 12px/1 var(--body);color:var(--fg);
+    border-radius:7px;
+  }
+  .seg button.on{background:var(--accent);color:#fff}
+  .swatches{display:flex;gap:8px}
+  .swatch{
+    width:32px;height:32px;border-radius:8px;border:2px solid transparent;cursor:pointer;
+    background-clip:padding-box;
+  }
+  .swatch.on{border-color:var(--fg)}
+  .swatch.cobalt{background:var(--cobalt)}
+  .swatch.spruce{background:var(--spruce)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
+  .row label{color:var(--fg)}
+  .toggle{
+    position:relative;width:36px;height:20px;background:var(--rule);border-radius:999px;
+    border:0;cursor:pointer;transition:background .2s;
+  }
+  .toggle::after{
+    content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;
+    border-radius:50%;transition:left .2s;
+  }
+  .toggle.on{background:var(--accent)}
+  .toggle.on::after{left:18px}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:900px){
+    .dates-row{grid-template-columns:1fr}
+    .clean-inner{grid-template-columns:1fr;gap:0}
+    .clean-text{padding:48px var(--pad)}
+    .clean-photo{min-height:280px}
+    .pride-grid{grid-template-columns:1fr;gap:32px}
+    .videos-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .countdown-inner{grid-template-columns:1fr;gap:32px}
+    .countdown-clock{grid-template-columns:repeat(4,1fr)}
+    .cd-unit{padding:16px 6px 12px}
+    .follow-grid{grid-template-columns:1fr 1fr}
+    .hero{grid-template-columns:1fr;padding-top:24px;min-height:auto;gap:0}
+    [data-hero="portrait-left"] .hero{grid-template-columns:1fr}
+    [data-hero="portrait-left"] .hero-text{order:1}
+    [data-hero="portrait-left"] .hero-portrait{order:2;justify-content:center}
+    [data-hero="portrait-left"] .hero-portrait img{transform:none}
+    .hero-text{order:1;padding:8px 0 24px}
+    .hero-portrait{order:2;min-height:auto;justify-content:center;margin-top:8px}
+    .hero-portrait img{height:auto;width:88%;max-width:480px;transform:none}
+    .hero-stripes{bottom:auto;height:60%}
+    .portrait-badge{top:12px;right:6%}
+    .why{grid-template-columns:1fr;gap:32px}
+    .issue{grid-template-columns:50px 1fr;gap:18px}
+    .issue-body{grid-column:1/-1;padding-left:50px}
+    .commit-grid{grid-template-columns:1fr}
+    .about{grid-template-columns:1fr;gap:32px}
+    .involve-grid{grid-template-columns:1fr}
+    .endorse-inner{grid-template-columns:1fr;gap:32px}
+    .foot-top{grid-template-columns:1fr 1fr;gap:24px}
+    section{padding:64px var(--pad)}
+    .nav-links a:not(.nav-cta){display:none}
+  }
+</style>
+</head>
+<body data-accent="cobalt" data-theme="light" data-hero="portrait-right" data-motif="on">
+
+<!-- ============ NAV ============ -->
+<nav class="nav" data-screen-label="01 Nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="dot"></span>
+      <span>Seth</span>
+      <span class="for">for SEA&nbsp;43-2040</span>
+    </a>
+    <div class="nav-links">
+      <a href="#why">Why</a>
+      <a href="#issues">Issues</a>
+      <a href="#about">About</a>
+      <a href="#involve">Get Involved</a>
+      <a class="nav-cta" href="#signup">Endorse →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header id="top" data-screen-label="02 Hero">
+  <div class="hero-wrap">
+
+    <!-- wrap-around stripes -->
+    <div class="hero-stripes" aria-hidden="true">
+      <svg viewBox="0 0 1440 660" preserveAspectRatio="none">
+        <!-- stripes confined to left/mid: frame Seth without crossing right-side text or form -->
+        <path d="M -40,440 L 320,440 C 480,440 540,560 660,560 L 700,560"
+              stroke="#002387" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M -40,510 L 320,510 C 480,510 540,630 660,630 L 700,630"
+              stroke="#1E4D2B" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M -40,580 L 320,580 C 480,580 540,700 660,700 L 700,700"
+              stroke="#9EB9D4" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="hero">
+      <div class="hero-portrait">
+        <img src="assets/seth-cutout.png" alt="Seth — candidate for SEA 43-2040 PCO">
+      </div>
+
+      <div class="hero-text">
+        <p class="eyebrow">PCO 2026 · SEA 43-2040</p>
+        <h1 class="h1">Transit.<br>Housing.<br><span class="lede-mark">Unions.</span></h1>
+        <p class="hero-sub">I'm Seth — your neighbor, running to be a Precinct Committee Officer.</p>
+
+        <form id="signup" class="signup" onsubmit="return signupSubmit(event)">
+          <div class="signup-row">
+            <input type="email" name="email" placeholder="Email address" required>
+            <button class="btn btn-primary" type="submit">Sign up</button>
+          </div>
+        </form>
+        <p class="signup-note">Primary <b>Aug 4, 2026</b> · General <b>Nov 3, 2026</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- urgency banner -->
+  <div class="urgency">
+    <span class="urgency-dot"></span>
+    <span><b>Primary: Aug 4, 2026</b> &nbsp;·&nbsp; <b>General: Nov 3, 2026</b> &nbsp;·&nbsp; <a href="#dates">Mark your calendar →</a></span>
+  </div>
+
+  <!-- ============ HORIZON STRIP ============ -->
+  <div class="horizon" id="horizon">
+    <svg viewBox="0 0 1240 220" preserveAspectRatio="none" aria-label="Symbology: water, mountains, transit, apartments, trees">
+      <!-- sky -->
+      <rect width="1240" height="220" fill="#9EB9D4"/>
+      <!-- sun -->
+      <circle cx="980" cy="58" r="22" fill="#EDEAE0" opacity=".85"/>
+      <!-- back mountains (spruce, lighter) -->
+      <path d="M0,150 L120,70 L200,110 L300,55 L420,120 L520,80 L640,130 L760,90 L880,140 L1000,95 L1120,135 L1240,90 L1240,220 L0,220 Z"
+            fill="#1E4D2B" opacity=".45"/>
+      <!-- mid mountains (spruce darker) -->
+      <path d="M0,170 L80,115 L180,150 L260,100 L360,155 L460,120 L560,165 L660,130 L780,170 L900,135 L1020,170 L1140,140 L1240,175 L1240,220 L0,220 Z"
+            fill="#1E4D2B" opacity=".75"/>
+      <!-- apartments silhouette band -->
+      <g fill="#002387">
+        <rect x="120" y="125" width="48" height="80"/>
+        <rect x="170" y="105" width="34" height="100"/>
+        <rect x="206" y="135" width="28" height="70"/>
+        <rect x="238" y="118" width="42" height="87"/>
+        <!-- second cluster -->
+        <rect x="680" y="115" width="52" height="90"/>
+        <rect x="734" y="95" width="36" height="110"/>
+        <rect x="772" y="128" width="30" height="77"/>
+        <rect x="804" y="110" width="46" height="95"/>
+        <rect x="852" y="130" width="26" height="75"/>
+      </g>
+      <!-- windows -->
+      <g fill="#EDEAE0">
+        <!-- cluster 1 windows -->
+        <rect x="128" y="135" width="6" height="6"/><rect x="142" y="135" width="6" height="6"/><rect x="156" y="135" width="6" height="6"/>
+        <rect x="128" y="150" width="6" height="6"/><rect x="142" y="150" width="6" height="6"/><rect x="156" y="150" width="6" height="6"/>
+        <rect x="128" y="165" width="6" height="6"/><rect x="142" y="165" width="6" height="6"/><rect x="156" y="165" width="6" height="6"/>
+        <rect x="178" y="115" width="6" height="6"/><rect x="192" y="115" width="6" height="6"/>
+        <rect x="178" y="130" width="6" height="6"/><rect x="192" y="130" width="6" height="6"/>
+        <rect x="178" y="145" width="6" height="6"/><rect x="192" y="145" width="6" height="6"/>
+        <rect x="178" y="160" width="6" height="6"/><rect x="192" y="160" width="6" height="6"/>
+        <rect x="178" y="175" width="6" height="6"/><rect x="192" y="175" width="6" height="6"/>
+        <rect x="246" y="128" width="6" height="6"/><rect x="260" y="128" width="6" height="6"/><rect x="274" y="128" width="6" height="6"/>
+        <rect x="246" y="143" width="6" height="6"/><rect x="260" y="143" width="6" height="6"/><rect x="274" y="143" width="6" height="6"/>
+        <rect x="246" y="158" width="6" height="6"/><rect x="260" y="158" width="6" height="6"/><rect x="274" y="158" width="6" height="6"/>
+        <rect x="246" y="173" width="6" height="6"/><rect x="260" y="173" width="6" height="6"/><rect x="274" y="173" width="6" height="6"/>
+        <!-- cluster 2 windows -->
+        <rect x="688" y="125" width="6" height="6"/><rect x="702" y="125" width="6" height="6"/><rect x="716" y="125" width="6" height="6"/>
+        <rect x="688" y="140" width="6" height="6"/><rect x="702" y="140" width="6" height="6"/><rect x="716" y="140" width="6" height="6"/>
+        <rect x="688" y="155" width="6" height="6"/><rect x="702" y="155" width="6" height="6"/><rect x="716" y="155" width="6" height="6"/>
+        <rect x="688" y="170" width="6" height="6"/><rect x="702" y="170" width="6" height="6"/><rect x="716" y="170" width="6" height="6"/>
+        <rect x="742" y="105" width="6" height="6"/><rect x="756" y="105" width="6" height="6"/>
+        <rect x="742" y="120" width="6" height="6"/><rect x="756" y="120" width="6" height="6"/>
+        <rect x="742" y="135" width="6" height="6"/><rect x="756" y="135" width="6" height="6"/>
+        <rect x="742" y="150" width="6" height="6"/><rect x="756" y="150" width="6" height="6"/>
+        <rect x="742" y="165" width="6" height="6"/><rect x="756" y="165" width="6" height="6"/>
+        <rect x="742" y="180" width="6" height="6"/><rect x="756" y="180" width="6" height="6"/>
+        <rect x="812" y="120" width="6" height="6"/><rect x="826" y="120" width="6" height="6"/><rect x="840" y="120" width="6" height="6"/>
+        <rect x="812" y="135" width="6" height="6"/><rect x="826" y="135" width="6" height="6"/><rect x="840" y="135" width="6" height="6"/>
+        <rect x="812" y="150" width="6" height="6"/><rect x="826" y="150" width="6" height="6"/><rect x="840" y="150" width="6" height="6"/>
+        <rect x="812" y="165" width="6" height="6"/><rect x="826" y="165" width="6" height="6"/><rect x="840" y="165" width="6" height="6"/>
+        <rect x="812" y="180" width="6" height="6"/><rect x="826" y="180" width="6" height="6"/><rect x="840" y="180" width="6" height="6"/>
+      </g>
+      <!-- trees -->
+      <g fill="#1E4D2B">
+        <polygon points="40,205 60,135 80,205"/>
+        <polygon points="70,205 92,150 114,205"/>
+        <polygon points="380,205 400,150 420,205"/>
+        <polygon points="408,205 432,140 456,205"/>
+        <polygon points="466,205 484,158 502,205"/>
+        <polygon points="900,205 920,145 940,205"/>
+        <polygon points="930,205 952,155 974,205"/>
+        <polygon points="1160,205 1180,150 1200,205"/>
+        <polygon points="1190,205 1212,140 1234,205"/>
+      </g>
+      <!-- transit line (road/bus track) -->
+      <rect x="0" y="188" width="1240" height="4" fill="#343434"/>
+      <g stroke="#EDEAE0" stroke-width="2" stroke-dasharray="14 10">
+        <line x1="0" y1="200" x2="1240" y2="200"/>
+      </g>
+
+      <!-- bus -->
+      <g id="bus" transform="translate(500,160)">
+        <!-- body -->
+        <rect x="0" y="0" width="120" height="32" rx="6" fill="#002387"/>
+        <!-- windows -->
+        <rect x="6" y="6" width="20" height="14" fill="#9EB9D4"/>
+        <rect x="30" y="6" width="20" height="14" fill="#9EB9D4"/>
+        <rect x="54" y="6" width="20" height="14" fill="#9EB9D4"/>
+        <rect x="78" y="6" width="20" height="14" fill="#9EB9D4"/>
+        <!-- door + headlight -->
+        <rect x="102" y="6" width="14" height="22" fill="#EDEAE0"/>
+        <rect x="113" y="12" width="6" height="6" fill="#fff"/>
+        <!-- wheels -->
+        <circle cx="22" cy="34" r="6" fill="#343434"/>
+        <circle cx="98" cy="34" r="6" fill="#343434"/>
+        <circle cx="22" cy="34" r="2" fill="#EDEAE0"/>
+        <circle cx="98" cy="34" r="2" fill="#EDEAE0"/>
+        <!-- route number -->
+        <rect x="4" y="2" width="22" height="6" fill="#EDEAE0"/>
+        <text x="15" y="7" font-family="JetBrains Mono,monospace" font-size="5" fill="#002387" text-anchor="middle" font-weight="700">43</text>
+      </g>
+
+      <!-- water foreground -->
+      <path d="M0,205 Q 60,200 120,205 T 240,205 T 360,205 T 480,205 T 600,205 T 720,205 T 840,205 T 960,205 T 1080,205 T 1240,205 L1240,220 L0,220 Z"
+            fill="#9EB9D4"/>
+      <path d="M0,210 Q 60,205 120,210 T 240,210 T 360,210 T 480,210 T 600,210 T 720,210 T 840,210 T 960,210 T 1080,210 T 1240,210 L1240,220 L0,220 Z"
+            fill="#002387" opacity=".55"/>
+    </svg>
+
+  </div>
+</header>
+
+<!-- ============ WHY ============ -->
+<section id="why" class="why-sec" data-screen-label="04 Why">
+  <div class="wrap why">
+    <div>
+      <p class="section-eyebrow">Why I'm running</p>
+      <h2>The fights that matter happen<br><em>at the precinct level.</em></h2>
+      <div class="why-meta">
+        <span class="pill"><span class="dot-s"></span>Primary Aug 4, 2026</span>
+        <span class="pill"><span class="dot-s"></span>Open to all 43LD Dems</span>
+        <span class="pill"><span class="dot-s"></span>No PAC money</span>
+      </div>
+    </div>
+    <div class="why-body">
+      <p>
+        Precinct Committee Officers are the smallest, loudest unit of the Democratic Party — your
+        neighbor with a vote on endorsements, platform language, and who gets the resources to
+        run for higher office. We don't have a marketing budget. We have each other.
+      </p>
+      <p>
+        I'm running because I want our precinct to be a relentless voice for the things
+        that actually shape life in Capitol Hill: <strong>frequent transit, abundant
+        housing, and strong unions.</strong> Not as slogans. As votes. As funding lines.
+        As zoning text.
+      </p>
+      <p>
+        I've spent four years writing software for Boeing's connected airplanes, and three
+        years organizing alongside my SPEEA brothers and sisters. I know how systems work,
+        and I know they only work when people show up.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ISSUES ============ -->
+<section id="issues" class="issues" data-screen-label="05 Issues">
+  <div class="wrap">
+    <div class="issues-head">
+      <h2>What I'll fight for, <em>in three words.</em></h2>
+      <p>
+        These aren't abstractions — they're the daily texture of my life in this
+        precinct. Below: what I believe, and what I'd vote for inside the 43LD.
+      </p>
+    </div>
+
+    <article class="issue">
+      <div class="issue-num">01 / TRANSIT</div>
+      <div class="issue-title">
+        <div class="issue-icon" aria-hidden="true">
+          <!-- bus icon -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+            <rect x="5" y="7" width="22" height="16" rx="2"/>
+            <line x1="5" y1="14" x2="27" y2="14"/>
+            <line x1="11" y1="7" x2="11" y2="14"/>
+            <line x1="16" y1="7" x2="16" y2="14"/>
+            <line x1="21" y1="7" x2="21" y2="14"/>
+            <circle cx="10" cy="25" r="2"/>
+            <circle cx="22" cy="25" r="2"/>
+            <line x1="5" y1="11" x2="3" y2="11"/>
+          </svg>
+        </div>
+        <h3>Transit that<br>shows up.</h3>
+      </div>
+      <div class="issue-body">
+        <span class="issue-tag">From a bus rider</span>
+        <p>
+          As a daily rider, I feel the difference between a <strong>10-minute headway and a 25</strong>.
+          A frequent bus changes the whole calculus of a neighborhood — who can work where,
+          who can afford to skip a car, who gets to age in place.
+        </p>
+        <p>
+          Two-pronged: <strong>defend and improve current service</strong>, and keep building
+          the regional network so it works at every hour of the day.
+        </p>
+        <p>
+          Transit needs <strong>stable funding</strong> — property tax, sales tax, and direct
+          city/county/state appropriations. No more begging the legislature mid-recession.
+        </p>
+      </div>
+    </article>
+
+    <article class="issue">
+      <div class="issue-num">02 / HOUSING</div>
+      <div class="issue-title">
+        <div class="issue-icon" aria-hidden="true">
+          <!-- apartments icon -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+            <rect x="5" y="6" width="9" height="22"/>
+            <rect x="14" y="11" width="13" height="17"/>
+            <line x1="7.5" y1="10" x2="7.5" y2="10.01"/>
+            <line x1="11.5" y1="10" x2="11.5" y2="10.01"/>
+            <line x1="7.5" y1="14" x2="7.5" y2="14.01"/>
+            <line x1="11.5" y1="14" x2="11.5" y2="14.01"/>
+            <line x1="7.5" y1="18" x2="7.5" y2="18.01"/>
+            <line x1="11.5" y1="18" x2="11.5" y2="18.01"/>
+            <line x1="7.5" y1="22" x2="7.5" y2="22.01"/>
+            <line x1="11.5" y1="22" x2="11.5" y2="22.01"/>
+            <line x1="17" y1="15" x2="17" y2="15.01"/>
+            <line x1="21" y1="15" x2="21" y2="15.01"/>
+            <line x1="24" y1="15" x2="24" y2="15.01"/>
+            <line x1="17" y1="19" x2="17" y2="19.01"/>
+            <line x1="21" y1="19" x2="21" y2="19.01"/>
+            <line x1="24" y1="19" x2="24" y2="19.01"/>
+            <line x1="17" y1="23" x2="17" y2="23.01"/>
+            <line x1="21" y1="23" x2="21" y2="23.01"/>
+            <line x1="24" y1="23" x2="24" y2="23.01"/>
+          </svg>
+        </div>
+        <h3>Housing,<br>abundantly.</h3>
+      </div>
+      <div class="issue-body">
+        <span class="issue-tag">From a renter</span>
+        <p>
+          I rent in Capitol Hill. I've watched friends move out of the neighborhood,
+          out of the city, sometimes out of the state — not because they wanted to,
+          but because <strong>the math stopped working</strong>.
+        </p>
+        <p>
+          The way you stabilize rent is to <strong>build more of it</strong>. Abundance,
+          not scarcity. Seattle and Washington made real progress easing zoning the last
+          few sessions — I want our precinct pushing harder in the same direction.
+        </p>
+        <p>
+          Dense, walkable communities like ours are <strong>great places to live</strong>.
+          The point isn't to defend that for the people already here — it's to make it
+          accessible to everyone who wants it.
+        </p>
+      </div>
+    </article>
+
+    <article class="issue">
+      <div class="issue-num">03 / UNIONS</div>
+      <div class="issue-title">
+        <div class="issue-icon" aria-hidden="true">
+          <!-- fist / solidarity icon -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+            <path d="M9 18 V11 a2 2 0 0 1 4 0 V8 a2 2 0 0 1 4 0 V9 a2 2 0 0 1 4 0 V11 a2 2 0 0 1 4 0 V19 a7 7 0 0 1 -7 7 H14 a5 5 0 0 1 -5 -5 z"/>
+            <line x1="13" y1="11" x2="13" y2="14"/>
+            <line x1="17" y1="9" x2="17" y2="14"/>
+            <line x1="21" y1="11" x2="21" y2="14"/>
+          </svg>
+        </div>
+        <h3>Unions, by<br>example.</h3>
+      </div>
+      <div class="issue-body">
+        <span class="issue-tag">From a union engineer · SPEEA</span>
+        <p>
+          I'm a software engineer in a union shop. Collective bargaining isn't theoretical
+          for me — it's <strong>my paycheck, my healthcare, my standing</strong> to
+          push back when something is wrong.
+        </p>
+        <p>
+          With federal labor protections being gutted, Washington has to be the floor.
+          That means <strong>stronger state-level rights</strong> to organize, to strike,
+          and to bargain — and a Democratic Party that treats labor as a coalition
+          partner, not a constituency to be managed.
+        </p>
+        <p>
+          My union, SPEEA, helped pass <strong>SB 5041</strong> — unemployment benefits
+          for striking workers. That kind of policy doesn't write itself. It comes from
+          PCOs, delegates, and members showing up year after year. I'd like to be one
+          of them.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ COMMIT LIST ============ -->
+<section class="commit" data-screen-label="06 Commitments">
+  <div class="wrap">
+    <h2>As your PCO, <em>I will:</em></h2>
+    <div class="commit-grid">
+      <div class="commit-item"><span class="chk">✓</span><span>Vote to endorse pro-transit, pro-housing, pro-labor candidates — every cycle.</span></div>
+      <div class="commit-item"><span class="chk">✓</span><span>Show up to every monthly 43LD meeting and report back what's voted on.</span></div>
+      <div class="commit-item"><span class="chk">✓</span><span>Push platform language that names <em>abundance</em> as a housing principle.</span></div>
+      <div class="commit-item"><span class="chk">✓</span><span>Defend striking-worker protections and expand state labor rights.</span></div>
+      <div class="commit-item"><span class="chk">✓</span><span>Keep our precinct's voice loud on Metro, Sound Transit, and WSDOT funding.</span></div>
+      <div class="commit-item"><span class="chk">✓</span><span>Talk to neighbors — not just the people already showing up to meetings.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIDE ============ -->
+<section class="pride" data-screen-label="06c Pride">
+  <div class="wrap">
+    <div class="pride-grid">
+      <div class="pride-photo">
+        <img src="assets/seattle-skyline.jpg" alt="Seattle skyline at sunset with Space Needle and Mount Rainier">
+      </div>
+      <div>
+        <p class="section-eyebrow">Our precinct</p>
+        <h2>Capitol Hill has always pushed Seattle forward. <em>It's time to do it again.</em></h2>
+        <p>From the LGBTQ rights movement to the WTO protests to the rent strikes of the last decade — when the city wouldn't move, this neighborhood pushed. We were the dense, walkable, transit-rich corner of Seattle before that was the platform.</p>
+        <p>The next fights — abundant housing, frequent transit, real labor rights — will be won the same way. Block by block. Neighbor by neighbor. Door by door.</p>
+        <a class="pride-cta" href="#involve">Join the precinct →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" data-screen-label="07 About">
+  <div class="wrap about">
+    <div class="about-photo" data-comment-anchor="about-photo">
+      <img src="assets/seth-cutout.png" alt="Seth">
+    </div>
+    <div>
+      <p class="section-eyebrow">About Seth</p>
+      <h2>An engineer, an organizer, <em>a neighbor.</em></h2>
+      <p>
+        I grew up around builders — people who measured, planned, and shipped. I studied
+        Computer Engineering at Northwestern as a combined BS/MS, finishing in 2022. I
+        led builds for the robotics club, served on Sigma Phi Epsilon's standards board,
+        and worked as Hillel's Jewish Greek Life Ambassador.
+      </p>
+      <p>
+        Since 2022 I've been a software engineer at Boeing Commercial Airplanes, on
+        cloud-based connected systems — the kind of work that only exists because someone,
+        somewhere, sat in a contract negotiation and won. I joined SPEEA my first month.
+      </p>
+
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-year">2022 — Present</div>
+          <div>
+            <div class="tl-role">Software Engineer · Boeing Commercial Airplanes</div>
+            <div class="tl-where">Seattle, on-site · Cloud-based connected systems · Azure</div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2021 — 2022</div>
+          <div>
+            <div class="tl-role">M.S. Computer Engineering · Northwestern</div>
+            <div class="tl-where">Combined BS/MS · Eta Kappa Nu</div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2018 — 2022</div>
+          <div>
+            <div class="tl-role">B.S. Computer Engineering · Northwestern</div>
+            <div class="tl-where">Robotics Club · IEEE · Sig Ep (Chaplain, Standards) · Hillel</div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">Today</div>
+          <div>
+            <div class="tl-role">Member · SPEEA (IFPTE Local 2001)</div>
+            <div class="tl-where">Helped pass SB 5041 — UI for striking workers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GET INVOLVED ============ -->
+<section id="involve" class="involve" data-screen-label="08 Get Involved">
+  <div class="wrap">
+    <p class="section-eyebrow">Get involved</p>
+    <h2>This is <em>a neighbor-to-neighbor</em> campaign.</h2>
+    <p class="lede">No mailers. No consultants. Just a precinct full of people who decided to bother.</p>
+
+    <div class="involve-grid">
+      <a class="involve-card" href="#">
+        <div class="ic-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+            <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/>
+          </svg>
+        </div>
+        <h4>Ask me anything</h4>
+        <p>15 minutes on the phone, or a coffee on 15th. Pick a time that works.</p>
+        <span class="ic-arrow">Book a slot →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATES ============ -->
+<section id="dates" class="dates" data-screen-label="09 Dates">
+  <div class="dates-inner">
+    <div class="dates-head">
+      <h2>Key dates, <em>2026.</em></h2>
+      <p>PCO races follow the standard 2026 King County election schedule. Mark your calendar — vote-by-mail ballots arrive about three weeks before each date.</p>
+    </div>
+    <div class="dates-row">
+      <div class="date-card">
+        <div class="dc-label">Primary election</div>
+        <div class="dc-date">August 4, 2026</div>
+        <div class="dc-sub">Vote-by-mail. Top two move on to November — every ballot counts.</div>
+        <div class="dc-meta">Tuesday · King County</div>
+      </div>
+      <div class="date-card">
+        <div class="dc-label">General election</div>
+        <div class="dc-date">November 3, 2026</div>
+        <div class="dc-meta">Tuesday · King County</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer data-screen-label="10 Footer">
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">Seth<span class="for">for SEA 43-2040 · PCO 2026</span></div>
+        <p class="foot-blurb">Transit. Housing. Unions. A precinct-level voice that shows up, reads the agenda, and votes the platform.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Campaign</h5>
+        <a href="#why">Why</a>
+        <a href="#issues">Issues</a>
+        <a href="#about">About Seth</a>
+        <a href="#involve">Get Involved</a>
+      </div>
+      <div class="foot-col">
+        <h5>Precinct</h5>
+        <a href="#">SEA 43-2040 map</a>
+        <a href="#">43LD Democrats</a>
+        <a href="#">Election dates</a>
+        <a href="#">PCO 101</a>
+      </div>
+      <div class="foot-col">
+        <h5>Get in touch</h5>
+        <a href="mailto:seth@for43-2040.org">seth@for43-2040.org</a>
+        <a href="#">Volunteer</a>
+        <a href="#">Press</a>
+        <a href="#">Press kit</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Paid for by Seth for SEA 43-2040 · A volunteer PCO campaign</span>
+      <span>Made on the 43 bus · © 2026</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TWEAKS PANEL ============ -->
+<div class="tweaks" id="tweaks">
+  <h4>Tweaks <button class="x" onclick="closeTweaks()" aria-label="Close">×</button></h4>
+
+  <div class="grp">
+    <h6>Accent</h6>
+    <div class="swatches">
+      <button class="swatch cobalt" data-acc="cobalt" title="True Cobalt"></button>
+      <button class="swatch spruce" data-acc="spruce" title="Dark Spruce"></button>
+    </div>
+  </div>
+
+  <div class="grp">
+    <h6>Theme</h6>
+    <div class="seg" id="seg-theme">
+      <button data-theme="light">Light</button>
+      <button data-theme="dark">Graphite</button>
+    </div>
+  </div>
+
+  <div class="grp">
+    <h6>Hero layout</h6>
+    <div class="seg" id="seg-hero">
+      <button data-hero="portrait-right">Portrait →</button>
+      <button data-hero="portrait-left">← Portrait</button>
+      <button data-hero="no-portrait">Text only</button>
+    </div>
+  </div>
+
+  <div class="grp">
+    <div class="row">
+      <label>Horizon motif</label>
+      <button class="toggle on" id="toggle-motif" aria-label="Toggle horizon motif"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ============ APPLY DEFAULTS ============ */
+  const body = document.body;
+  function applyTweaks(t){
+    body.dataset.accent = t.accent;
+    body.dataset.theme = t.theme;
+    body.dataset.hero = t.heroLayout;
+    document.getElementById('horizon').style.display = t.horizonMotif ? '' : 'none';
+    // sync UI
+    document.querySelectorAll('.swatch').forEach(b => b.classList.toggle('on', b.dataset.acc === t.accent));
+    document.querySelectorAll('#seg-theme button').forEach(b => b.classList.toggle('on', b.dataset.theme === t.theme));
+    document.querySelectorAll('#seg-hero button').forEach(b => b.classList.toggle('on', b.dataset.hero === t.heroLayout));
+    document.getElementById('toggle-motif').classList.toggle('on', t.horizonMotif);
+  }
+  applyTweaks(TWEAKS);
+
+  function setTweak(k, v){
+    TWEAKS[k] = v;
+    applyTweaks(TWEAKS);
+    try{
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{[k]:v}}, '*');
+    }catch(e){}
+  }
+
+  document.querySelectorAll('.swatch').forEach(b => b.addEventListener('click', () => setTweak('accent', b.dataset.acc)));
+  document.querySelectorAll('#seg-theme button').forEach(b => b.addEventListener('click', () => setTweak('theme', b.dataset.theme)));
+  document.querySelectorAll('#seg-hero button').forEach(b => b.addEventListener('click', () => setTweak('heroLayout', b.dataset.hero)));
+  document.getElementById('toggle-motif').addEventListener('click', () => setTweak('horizonMotif', !TWEAKS.horizonMotif));
+
+  /* ============ EDIT MODE PROTOCOL ============ */
+  window.addEventListener('message', (e) => {
+    if(!e.data || typeof e.data !== 'object') return;
+    if(e.data.type === '__activate_edit_mode') openTweaks();
+    if(e.data.type === '__deactivate_edit_mode') closeTweaks();
+  });
+  function openTweaks(){ document.getElementById('tweaks').classList.add('open'); }
+  function closeTweaks(){
+    document.getElementById('tweaks').classList.remove('open');
+    try{ window.parent.postMessage({type:'__edit_mode_dismissed'}, '*'); }catch(e){}
+  }
+  try{ window.parent.postMessage({type:'__edit_mode_available'}, '*'); }catch(e){}
+
+  /* ============ SIGN-UP ============ */
+  function signupSubmit(ev){
+    ev.preventDefault();
+    const f = ev.target;
+    const btn = f.querySelector('.btn-primary');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Thanks — we\u2019ll be in touch';
+    btn.style.background = 'var(--spruce)';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; f.reset(); }, 2400);
+    return false;
+  }
+
+  /* ============ BUS ANIMATION ============ */
+  (function busDrive(){
+    const bus = document.getElementById('bus');
+    if(!bus) return;
+    let t = 0;
+    function frame(){
+      t += 0.4;
+      // float along the route; gentle bob
+      const x = 80 + ((t) % 1080);
+      const bob = Math.sin(t/8) * 0.6;
+      bus.setAttribute('transform', `translate(${x}, ${160 + bob})`);
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+
+  /* ============ SMOOTH SCROLL ============ */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el){
+        e.preventDefault();
+        window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+      }
+    });
+  });
+</script>
+</body>
+</html>
